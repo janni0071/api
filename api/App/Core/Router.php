@@ -18,17 +18,25 @@ class Router {
     public function delete($uri, $controller){
         $this->add($uri, $controller, 'DELETE');
     }
+
     protected function add($uri, $controller, $method){
+        // Convert dynamic segments into regex
+        $uri = preg_replace('/\{([a-z]+)\}/', '(?P<\1>[^/]+)', $uri);
+        $uri = '#^' . $uri . '$#';
         $this->routes[] = [
             'uri' => $uri,
-            'controller' => $controller,
-            'method' => $method
+            'method' => $method,
+            'controller' => $controller
         ];
     }
 
     public function route($uri, $method){
         foreach ($this->routes as $route) {
-            if($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+            if (preg_match($route['uri'], $uri, $matches) && $route['method'] === strtoupper($method)) {
+                // Filter only named parameters from $matches
+                $params = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
+  
+                // Include the controller and pass the $params array
                 return require base_path($route['controller']);
             }
         }

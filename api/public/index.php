@@ -1,7 +1,5 @@
 <?php
 
-echo 'meow';
-
 const BASE_PATH = __DIR__ . "/../";
 
 require str_replace('/', DIRECTORY_SEPARATOR, BASE_PATH  . 'App/Core/functions.php');
