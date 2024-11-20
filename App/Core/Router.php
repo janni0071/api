@@ -41,14 +41,9 @@ class Router {
                 return require base_path($route['controller']);
             }
         }
-        $this->abort();
-    }
-    protected function abort($code = 404, $message = 'Not Found') {
-        http_response_code($code);
-        echo json_encode([
+        Response::json([
             'status' => 'error',
-            'message' => $message
-        ]);
-        exit;
+            'message' => 'Not Found'
+        ], Response::NOT_FOUND);
     }
 }
