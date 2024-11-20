@@ -1,0 +1,15 @@
+# Enable the Rewrite Engine to allow URL rewriting
+RewriteEngine on
+
+# Condition: Check if the HTTP host is either 'api.test' or 'www.api.test'
+# [NC] makes the match case-insensitive, and [OR] allows multiple conditions.
+RewriteCond %{HTTP_HOST} ^api.test$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.api.test$ [NC]
+
+# Condition: Ensure the requested URI is NOT already inside the /public directory.
+# This prevents an infinite loop of redirects when accessing files within /public.
+RewriteCond %{REQUEST_URI} !^/public/
+
+# Rule: If the above conditions are met, redirect the request to /public.
+# ^(.*)$ matches any URL, and /public/$1 rewrites it to /public while preserving the original path.
+RewriteRule ^(.*)$ /public/$1 [L]
