@@ -14,6 +14,7 @@ $fk_lehrbetrieb = $input['fk_lehrbetrieb'] ?? null;
 $fk_lernende = $input['fk_lernende'] ?? null;
 $start_date = htmlspecialchars($input['start_date'] ?? '', ENT_QUOTES, 'UTF-8');
 $end_date = htmlspecialchars($input['end_date'] ?? '', ENT_QUOTES, 'UTF-8');
+$beruf = htmlspecialchars($input['beruf'] ?? '', ENT_QUOTES, 'UTF-8');
 
 // Check required fields
 $errors = [];
@@ -25,6 +26,9 @@ if (!$fk_lernende || !ctype_digit($fk_lernende)) {
 }
 if (empty($start_date)) {
     $errors['start_date'] = 'Start date is required.';
+}
+if (empty($beruf)) {
+    $errors['beruf'] = 'Beruf is required.';
 }
 if (!empty($errors)) {
     Response::json([
@@ -53,7 +57,7 @@ try {
     if ($stmt->fetchColumn() == 0) {
         Response::json([
             'status' => 'error',
-            'message' => "Lernende with ID $fk_lernende does not exist."
+            'message' => "Lehrling with ID $fk_lernende does not exist."
         ], Response::BAD_REQUEST);
         exit;
     }

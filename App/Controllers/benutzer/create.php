@@ -17,8 +17,6 @@ $created_at = htmlspecialchars($input['created_at'] ?? '', ENT_QUOTES, 'UTF-8');
 // Initial validation: check for empty fields
 $errors = [];
 if (empty($username)) $errors['username'] = 'Username is required.';
-if (empty($api_key)) $errors['api_key'] = 'API key is required.';
-if (empty($created_at)) $errors['created_at'] = '"created_at" is required.';
 
 if (!empty($errors)) {
     // Send error response in JSON format with a 400 Bad Request status
