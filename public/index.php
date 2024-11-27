@@ -18,11 +18,3 @@ $method = $_SERVER['REQUEST_METHOD'];
 $router = new Router();
 $routes = require base_path('App/Core/routes.php');
 $router->route($path, $method);
-
-$config = require base_path('App/Core/config.php');
-$db = new Database($config['database']);
-$query = 'SELECT * FROM tbl_countries';
-$result = $db->query($query);
-$result->execute();
-
-dd($result->fetchAll());
