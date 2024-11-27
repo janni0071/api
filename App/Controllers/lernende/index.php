@@ -8,24 +8,24 @@ $db = DatabaseConnection::getDatabase();
 
 try {
     // Query to select all lehrbetriebe
-    $query = 'SELECT * FROM tbl_kurse';
+    $query = 'SELECT * FROM tbl_lernende';
     $stmt = $db->query($query);
     $stmt->execute();
 
     // Fetch all records
-    $kurse = $stmt->fetchAll();
+    $lernende = $stmt->fetchAll();
 
     // Send success response with the records
     Response::json([
         'status' => 'success',
-        'message' => 'Kurse retrieved successfully',
-        'data' => $kurse
+        'message' => 'Lernende retrieved successfully',
+        'data' => $lernende
     ], Response::OK);
 } catch (Exception $e) {
     // Handle unexpected errors with a 500 Internal Server Error response
     Response::json([
         'status' => 'error',
-        'message' => 'An error occurred while retrieving Kurse',
+        'message' => 'An error occurred while retrieving Lernende',
         'data' => ['error' => $e->getMessage()]
     ], Response::SERVER_ERROR);
 }

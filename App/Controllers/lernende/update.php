@@ -59,6 +59,10 @@ if (isset($params['id']) && ctype_digit($params['id'])) {
             $fieldsToUpdate[] = 'email = :email';
             $params[':email'] = htmlspecialchars($input['email'], ENT_QUOTES, 'UTF-8');
         }
+        if (isset($input['email_privat'])) {
+            $fieldsToUpdate[] = 'email_privat = :email_privat';
+            $params[':email_privat'] = htmlspecialchars($input['email_privat'], ENT_QUOTES, 'UTF-8');
+        }
         if (isset($input['birthdate'])) {
             $fieldsToUpdate[] = 'birthdate = :birthdate';
             $params[':birthdate'] = htmlspecialchars($input['birthdate'], ENT_QUOTES, 'UTF-8');

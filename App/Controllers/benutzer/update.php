@@ -45,7 +45,7 @@ if (isset($params['id']) && ctype_digit($params['id'])) {
         $params[':id'] = $id;
 
         // Construct the SQL query with dynamic SET clause
-        $query = 'UPDATE tbl_benutzer SET ' . implode(', ', $fieldsToUpdate) . ' WHERE id_benutzer = :id';
+        $query = 'UPDATE tbl_benutzer SET ' . implode(', ', $fieldsToUpdate) . ' WHERE id = :id';
         
         // Execute the query through the Database class
         $stmt = $db->query($query);

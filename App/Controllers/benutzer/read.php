@@ -12,7 +12,7 @@ if (isset($params['id']) && ctype_digit($params['id'])) {
 
     try {
         // Prepare and execute the query to find the lehrbetrieb by id
-        $query = 'SELECT * FROM tbl_benutzer WHERE id_benutzer = :id';
+        $query = 'SELECT * FROM tbl_benutzer WHERE id = :id';
 
         // Execute the query through the Database class
         $stmt = $db->query($query);
