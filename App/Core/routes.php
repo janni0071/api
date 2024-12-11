@@ -21,9 +21,6 @@ foreach ($resources as $resource => $resource_path) {
     $router->delete("/{$resource}/{id}", "{$resource_path}/delete.php");
 }
 
-$router->get('/cats', 'App/Controllers/cats/index.php');
-$router->get('/cats/{id}', 'App/Controllers/cats/retrieve.php');
-
 // Lehrbetriebe
 $router->get('/lehrbetriebe', 'App/Controllers/lehrbetriebe/index.php');
 $router->post('/lehrbetriebe', 'App/Controllers/lehrbetriebe/create.php');
