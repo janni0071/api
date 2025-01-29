@@ -26,15 +26,6 @@ $birthdate = htmlspecialchars($input['birthdate'] ?? '', ENT_QUOTES, 'UTF-8');
 $errors = [];
 if (empty($vorname)) $errors['vorname'] = 'Vorname is required.';
 if (empty($nachname)) $errors['nachname'] = 'Nachname is required.';
-if (empty($strasse)) $errors['strasse'] = 'Strasse is required.';
-if (empty($plz)) $errors['plz'] = 'PLZ is required.';
-if (empty($ort)) $errors['ort'] = 'Ort is required.';
-if (empty($fk_land)) $errors['fk_land'] = 'fk_land is required.';
-if (empty($geschlecht)) $errors['geschlecht'] = 'Geschlecht is required.';
-if (empty($telefon)) $errors['telefon'] = 'Telefon is required.';
-if (empty($handy)) $errors['handy'] = 'Handy is required.';
-if (empty($email)) $errors['email'] = 'Email is required.';
-if (empty($birthdate)) $errors['birthdate'] = 'Birthdate is required.';
 
 if (!empty($errors)) {
     // Send error response in JSON format with a 400 Bad Request status
