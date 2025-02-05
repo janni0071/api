@@ -24,7 +24,7 @@ if (isset($params['id']) && ctype_digit($params['id'])) {
             Response::json([
                 'status' => 'success',
                 'message' => 'Lehrling found',
-                'data' => $dozent
+                'data' => $lehrling
             ], Response::OK);
         } else {
             // Send a 404 Not Found response if no record is found
