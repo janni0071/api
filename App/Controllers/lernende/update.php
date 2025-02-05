@@ -81,7 +81,7 @@ if (isset($params['id']) && ctype_digit($params['id'])) {
         $params[':id'] = $id;
 
         // Construct the SQL query with dynamic SET clause
-        $query = 'UPDATE tbl_dozenten SET ' . implode(', ', $fieldsToUpdate) . ' WHERE id_dozent = :id';
+        $query = 'UPDATE tbl_lernende SET ' . implode(', ', $fieldsToUpdate) . ' WHERE id_lernende = :id';
         
         // Execute the query through the Database class
         $stmt = $db->query($query);
@@ -90,14 +90,14 @@ if (isset($params['id']) && ctype_digit($params['id'])) {
         // Send a success response
         Response::json([
             'status' => 'success',
-            'message' => 'Dozent updated successfully!'
+            'message' => 'Lehrling updated successfully!'
         ], Response::OK);
 
     } catch (Exception $e) {
         // Handle unexpected errors with a 500 Internal Server Error response
         Response::json([
             'status' => 'error',
-            'message' => 'An error occurred while updating the Dozent'
+            'message' => 'An error occurred while updating the Lehrling'
         ], Response::SERVER_ERROR);
     }
 } else {
