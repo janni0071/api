@@ -12,8 +12,8 @@ $input = json_decode(file_get_contents('php://input'), true);
 // Extract and validate inputs
 $fk_lehrbetrieb = $input['fk_lehrbetrieb'] ?? null;
 $fk_lernende = $input['fk_lernende'] ?? null;
-$start_date = htmlspecialchars($input['start_date'] ?? '', ENT_QUOTES, 'UTF-8');
-$end_date = htmlspecialchars($input['end_date'] ?? '', ENT_QUOTES, 'UTF-8');
+$start = htmlspecialchars($input['start_date'] ?? '', ENT_QUOTES, 'UTF-8');
+$ende = htmlspecialchars($input['end_date'] ?? '', ENT_QUOTES, 'UTF-8');
 $beruf = htmlspecialchars($input['beruf'] ?? '', ENT_QUOTES, 'UTF-8');
 
 // Check required fields
@@ -24,8 +24,11 @@ if (!$fk_lehrbetrieb || !ctype_digit($fk_lehrbetrieb)) {
 if (!$fk_lernende || !ctype_digit($fk_lernende)) {
     $errors['fk_lernende'] = 'Valid fk_lernende is required.';
 }
-if (empty($start_date)) {
+if (empty($start)) {
     $errors['start_date'] = 'Start date is required.';
+}
+if (empty($ende)) {
+    $errors['end_date'] = 'End date is required.';
 }
 if (empty($beruf)) {
     $errors['beruf'] = 'Beruf is required.';
@@ -63,14 +66,14 @@ try {
     }
 
     // Insert the lehrbetrieb_lernende entry
-    $query = 'INSERT INTO tbl_lehrbetrieb_lernende (fk_lehrbetrieb, fk_lernende, start_date, end_date) 
-            VALUES (:fk_lehrbetrieb, :fk_lernende, :start_date, :end_date)';
+    $query = 'INSERT INTO tbl_lehrbetrieb_lernende (fk_lehrbetrieb, fk_lernende, start, ende) 
+            VALUES (:fk_lehrbetrieb, :fk_lernende, :start, :ende)';
     $stmt = $db->query($query);
     $stmt->execute([
         ':fk_lehrbetrieb' => $fk_lehrbetrieb,
         ':fk_lernende' => $fk_lernende,
-        ':start_date' => $start_date,
-        ':end_date' => $end_date
+        ':start' => $start,
+        ':end' => $ende
     ]);
 
     // Success response
@@ -82,6 +85,6 @@ try {
     // Handle unexpected errors with a generic error message
     Response::json([
         'status' => 'error',
-        'message' => 'An error occurred while creating the entry.'
+        'message' => $e
     ], Response::SERVER_ERROR);
 }

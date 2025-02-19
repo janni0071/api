@@ -23,19 +23,11 @@ try {
     $results = $stmt->fetchAll();
 
     // Check if results were found
-    if ($results) {
-        Response::json([
-            'status' => 'success',
-            'message' => 'Entries retrieved successfully',
-            'data' => $results
-        ], Response::OK);
-    } else {
-        // No entries found
-        Response::json([
-            'status' => 'error',
-            'message' => 'No entries found'
-        ], Response::NOT_FOUND);
-    }
+    Response::json([
+        'status' => 'success',
+        'message' => 'Entries retrieved successfully',
+        'data' => $results
+    ], Response::OK);
 } catch (Exception $e) {
     // Handle unexpected errors with a 500 Internal Server Error response
     Response::json([
